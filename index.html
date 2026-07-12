@@ -132,26 +132,6 @@
   .made h3{font-size:1.02rem;margin-bottom:6px}
   .made p{font-size:.88rem;color:var(--ink-soft)}
 
-  /* pricing */
-  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:stretch}
-  @media (max-width:860px){.plans{grid-template-columns:1fr}}
-  .plan{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:24px;position:relative;display:flex;flex-direction:column}
-  .plan.hot{border-color:var(--grass);box-shadow:0 0 0 1.5px var(--grass)}
-  .plan .flag{
-    position:absolute;top:-12px;left:16px;background:var(--grass);color:#F2F7EC;
-    font-size:.72rem;font-weight:800;padding:4px 10px;border-radius:9px;transform:rotate(-1.5deg);
-  }
-  .plan h3{font-size:1.05rem}
-  .plan .price{font-family:var(--serif);font-size:2rem;font-weight:600;margin:8px 0 2px}
-  .plan .price small{font-family:var(--sans);font-size:.85rem;color:var(--ink-soft);font-weight:600}
-  .plan ul{margin:14px 0 0;padding:0;list-style:none;font-size:.9rem;color:var(--ink-soft);display:flex;flex-direction:column;gap:7px}
-  .plan li::before{content:"✓ ";color:var(--grass);font-weight:800}
-  .free-line{
-    background:var(--card);border:1.5px dashed var(--marigold);border-radius:14px;
-    padding:16px 20px;margin-bottom:26px;font-weight:600;text-align:center;
-  }
-  .plans-fine{margin-top:18px;font-size:.85rem;color:var(--ink-soft);text-align:center}
-
   /* faq */
   .faq{max-width:760px}
   .faq details{border-bottom:1.5px solid var(--line);padding:16px 4px}
@@ -179,7 +159,6 @@
     <nav class="nav-links">
       <a href="#how">How it works</a>
       <a href="#pages">Real pages</a>
-      <a href="#pricing">Pricing</a>
       <a href="#get">Get the app</a>
       <a href="support.html">Support</a>
     </nav>
@@ -282,45 +261,6 @@
         <div class="card"><h3>Grown-ups too</h3><p>Intricate botanicals and mandalas of your world — a single page takes an evening.</p></div>
       </div>
     </div>
-  </section>
-
-  <section id="pricing" class="wrap">
-    <div class="sec-head">
-      <h2>Fair prices, no tricks.</h2>
-      <p>No countdown timers, no ads, and everything you make is yours forever — including everything made on the free book.</p>
-    </div>
-    <div class="free-line">🖍️ Your first book is free. No card, no catch.</div>
-    <div class="plans">
-      <div class="plan">
-        <h3>Just one thing</h3>
-        <p class="price">$0.99 <small>a page</small> · $3.99 <small>a book</small></p>
-        <ul>
-          <li>One standalone drawing, or one full book</li>
-          <li>Cover, dedication and print-ready PDF</li>
-          <li>Perfect for a birthday keepsake</li>
-        </ul>
-      </div>
-      <div class="plan hot">
-        <div class="flag">Most parents pick this</div>
-        <h3>ColorMuse Unlimited</h3>
-        <p class="price">$9.99 <small>/ month</small></p>
-        <ul>
-          <li>Unlimited books and pages</li>
-          <li>Every theme, every linework level</li>
-          <li>Cancel anytime in Settings</li>
-        </ul>
-      </div>
-      <div class="plan">
-        <h3>Unlimited Yearly</h3>
-        <p class="price">$79.99 <small>/ year</small></p>
-        <ul>
-          <li>Everything in Unlimited</li>
-          <li>Every birthday and holiday covered</li>
-          <li>Around $6.67 a month</li>
-        </ul>
-      </div>
-    </div>
-    <p class="plans-fine">A weekly pass ($7.99) is in the app for party-prep emergencies. Prices in USD; billed by Apple.</p>
   </section>
 
   <section class="wrap">
