@@ -57,7 +57,20 @@
   }
   .cta:hover{transform:translateY(-1px)}
   .cta.quiet{background:transparent;color:var(--ink);box-shadow:none;border:1.5px solid var(--line)}
-  .soon{font-size:.85rem;color:var(--ink-soft);font-weight:600}
+  .soon{font-size:.85rem;color:var(--ink-soft);font-weight:600;line-height:1.5}
+  .hero-icon{height:52px;border-radius:12px;border:1.5px solid var(--line)}
+  .badge{height:52px;display:block}
+
+  /* inside the app */
+  .phones{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;max-width:880px;margin:0 auto}
+  @media (max-width:760px){.phones{grid-template-columns:1fr;max-width:320px}}
+  .iphone{margin:0}
+  .iphone .bezel{
+    background:#26211A;border-radius:42px;padding:9px;
+    box-shadow:0 22px 44px -16px rgba(43,37,28,.4);
+  }
+  .iphone img{display:block;width:100%;border-radius:34px}
+  .iphone figcaption{text-align:center;font-size:.85rem;font-weight:600;color:var(--ink-soft);margin-top:12px}
   .chips{display:flex;gap:10px 18px;flex-wrap:wrap;margin-top:22px;font-size:.9rem;color:var(--ink-soft);font-weight:600}
   .chips span::before{content:"✓ ";color:var(--grass);font-weight:800}
 
@@ -167,6 +180,7 @@
       <a href="#how">How it works</a>
       <a href="#pages">Real pages</a>
       <a href="#pricing">Pricing</a>
+      <a href="#get">Get the app</a>
       <a href="support.html">Support</a>
     </nav>
   </div>
@@ -177,10 +191,11 @@
     <div>
       <div class="eyebrow">Made by parents, printed on fridge doors</div>
       <h1>Colouring books that actually look like <span class="under">your family<svg viewBox="0 0 200 12" preserveAspectRatio="none"><path d="M4 8 Q30 2 60 7 T110 6 T160 8 T196 5" fill="none" stroke="#D9542B" stroke-width="4.5" stroke-linecap="round"/></svg></span>.</h1>
-      <p class="lede">Add a few photos — of her, of him, of the dog — or just tell the story, and ColorMuse draws it into a printable colouring book. Their curls. Their grin. Their dinosaur phase. Print it, staple it, treasure it.</p>
+      <p class="lede">Add a few photos — of her, of him, of the dog — or just tell the story, and the ColorMuse app draws it into a printable colouring book. Their curls. Their grin. Their dinosaur phase. Print it, staple it, treasure it.</p>
       <div class="cta-row">
-        <a class="cta" href="mailto:cre8t0@gmail.com?subject=ColorMuse%20early%20access&body=Save%20me%20a%20spot!">Get early access</a>
-        <span class="soon">Coming soon to the App Store · in final testing now</span>
+        <img class="hero-icon" src="assets/app-icon.png" alt="ColorMuse app icon">
+        <a href="#get" aria-label="Download on the App Store — coming soon"><img class="badge" src="assets/badge-app-store.svg" alt="Download on the App Store"></a>
+        <span class="soon">Coming soon — iPhone first, in final testing.<br><a href="mailto:cre8t0@gmail.com?subject=ColorMuse%20early%20access&body=Save%20me%20a%20spot!">Get early access →</a></span>
       </div>
       <div class="chips">
         <span>First book free</span>
@@ -216,6 +231,18 @@
         <h3>Print and staple</h3>
         <p>A print-ready PDF with a typeset cover and your dedication inside — “for our brave girl, love Mum &amp; Dad.” Crisp true-black lines on any home printer, US Letter or A4.</p>
       </div>
+    </div>
+  </section>
+
+  <section id="app" class="wrap">
+    <div class="sec-head">
+      <h2>Inside the app.</h2>
+      <p>Real screens, not mockups — the shelf of your books, the character builder, and every finished book readable right in the app.</p>
+    </div>
+    <div class="phones">
+      <figure class="iphone"><div class="bezel"><img src="assets/app-shelf.jpg" alt="ColorMuse app home screen showing a shelf of finished colouring books" loading="lazy"></div><figcaption>Your shelf — every book kept</figcaption></figure>
+      <figure class="iphone"><div class="bezel"><img src="assets/app-create.jpg" alt="ColorMuse character builder with real hair style options like puff braids, cornrows and locs" loading="lazy"></div><figcaption>Describe them — real hair, drawn right</figcaption></figure>
+      <figure class="iphone"><div class="bezel"><img src="assets/app-reader.jpg" alt="Reading a finished colouring book inside the ColorMuse app" loading="lazy"></div><figcaption>Read it, print it, share it</figcaption></figure>
     </div>
   </section>
 
@@ -327,13 +354,15 @@
     </div>
   </section>
 
-  <section class="final">
+  <section id="get" class="final">
     <div class="wrap">
       <h2>Tonight's the night you become<br>the parent who makes the book.</h2>
       <p>First one's free — fridge-door immortality included.</p>
-      <div class="cta-row">
-        <a class="cta" href="mailto:cre8t0@gmail.com?subject=ColorMuse%20early%20access&body=Save%20me%20a%20spot!">Get early access</a>
+      <div class="cta-row" style="margin-top:24px">
+        <img class="hero-icon" src="assets/app-icon.png" alt="">
+        <img class="badge" src="assets/badge-app-store.svg" alt="Download on the App Store — coming soon">
       </div>
+      <p style="margin-top:14px;font-size:.9rem">The ColorMuse app is in final testing — iPhone first, Android later.<br><a href="mailto:cre8t0@gmail.com?subject=ColorMuse%20early%20access&body=Save%20me%20a%20spot!">Get early access →</a></p>
     </div>
   </section>
 </main>
