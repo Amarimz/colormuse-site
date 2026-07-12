@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ColorMuse AI — Colouring books that actually look like your family</title>
+<meta name="description" content="Add a few photos or a short story and ColorMuse draws a printable colouring book starring your family. Their curls. Their grin. Their dinosaur phase.">
+<link rel="icon" href="assets/colormuse-mark.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF7EE; --paper-deep:#F3ECDC; --card:#FFFDF6;
+    --ink:#2B251C; --ink-soft:#6E6455; --line:#E2D8C4;
+    --tomato:#D9542B; --tomato-press:#B23F1D;
+    --marigold:#E8A63C; --grass:#6E9E52; --cornflower:#5C7EC2;
+    --serif:"Fraunces", Georgia, serif;
+    --sans:"Nunito Sans", -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--sans); line-height:1.6; font-size:16.5px;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.035 0'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>");
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.12;letter-spacing:-.01em;margin:0}
+  p{margin:0}
+  a{color:var(--tomato)}
+
+  /* header */
+  header{padding:22px 0}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+  .brand img{height:34px}
+  .brand span{font-family:var(--serif);font-weight:600;font-size:1.25rem}
+  .nav-links{display:flex;gap:22px;font-weight:600;font-size:.95rem}
+  .nav-links a{color:var(--ink-soft);text-decoration:none}
+  .nav-links a:hover{color:var(--tomato)}
+
+  /* hero */
+  .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding:44px 0 30px}
+  @media (max-width:860px){.hero{grid-template-columns:1fr;gap:34px}}
+  .eyebrow{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);
+    display:flex;align-items:center;gap:10px;margin-bottom:16px;font-weight:700}
+  .eyebrow::before{content:"";width:22px;height:4px;border-radius:2px;background:var(--tomato);transform:rotate(-2deg)}
+  .hero h1{font-size:clamp(2.1rem,4.6vw,3.3rem)}
+  .hero h1 .under{position:relative;white-space:nowrap}
+  .hero h1 .under svg{position:absolute;left:0;right:0;bottom:-7px;width:100%;height:11px}
+  .hero .lede{margin-top:18px;font-size:1.13rem;color:var(--ink-soft);max-width:36em}
+  .cta-row{display:flex;gap:12px;align-items:center;margin-top:26px;flex-wrap:wrap}
+  .cta{
+    display:inline-block;background:var(--tomato);color:#FDF8EF;text-decoration:none;
+    font-weight:700;font-size:1.02rem;padding:14px 26px;border-radius:14px;
+    box-shadow:0 3px 0 var(--tomato-press);
+  }
+  .cta:hover{transform:translateY(-1px)}
+  .cta.quiet{background:transparent;color:var(--ink);box-shadow:none;border:1.5px solid var(--line)}
+  .soon{font-size:.85rem;color:var(--ink-soft);font-weight:600}
+  .chips{display:flex;gap:10px 18px;flex-wrap:wrap;margin-top:22px;font-size:.9rem;color:var(--ink-soft);font-weight:600}
+  .chips span::before{content:"✓ ";color:var(--grass);font-weight:800}
+
+  /* hero art: fanned real pages */
+  .fan{position:relative;height:480px}
+  @media (max-width:860px){.fan{height:420px;max-width:420px;margin:0 auto}}
+  .page{
+    position:absolute;background:var(--card);padding:10px 10px 30px;border-radius:8px;
+    border:1.5px solid var(--line);box-shadow:0 18px 40px -14px rgba(43,37,28,.35);
+  }
+  .page img{display:block;width:100%;border-radius:3px}
+  .page figcaption{font-size:.72rem;color:var(--ink-soft);text-align:center;margin-top:8px;font-weight:600}
+  .p1{width:54%;left:0;top:6%;transform:rotate(-4deg);z-index:1}
+  .p2{width:56%;right:0;top:0;transform:rotate(3deg);z-index:2}
+  .p3{width:46%;left:24%;bottom:0;transform:rotate(-1deg);z-index:3}
+
+  /* sections */
+  section{padding:64px 0}
+  .sec-head{max-width:640px;margin-bottom:38px}
+  .sec-head h2{font-size:clamp(1.6rem,3vw,2.2rem)}
+  .sec-head p{margin-top:10px;color:var(--ink-soft)}
+
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media (max-width:760px){.steps{grid-template-columns:1fr}}
+  .step{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:26px 22px}
+  .step .num{
+    width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-family:var(--serif);font-weight:600;color:#FDF8EF;margin-bottom:14px;font-size:1.05rem;
+  }
+  .step:nth-child(1) .num{background:var(--tomato)}
+  .step:nth-child(2) .num{background:var(--cornflower)}
+  .step:nth-child(3) .num{background:var(--grass)}
+  .step h3{font-size:1.15rem;margin-bottom:8px}
+  .step p{font-size:.95rem;color:var(--ink-soft)}
+
+  /* gallery */
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  @media (max-width:860px){.gallery{grid-template-columns:repeat(2,1fr)}}
+  .gallery figure{margin:0;background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:8px 8px 12px}
+  .gallery img{width:100%;display:block;border-radius:5px}
+  .gallery figcaption{font-size:.78rem;color:var(--ink-soft);margin-top:8px;text-align:center;font-weight:600}
+  .gallery-note{margin-top:16px;font-size:.9rem;color:var(--ink-soft);text-align:center}
+
+  /* drawn true */
+  .true-band{background:var(--paper-deep);border-top:1.5px solid var(--line);border-bottom:1.5px solid var(--line)}
+  .true-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center}
+  @media (max-width:860px){.true-grid{grid-template-columns:1fr}}
+  .true-list{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}
+  .true-list span{
+    background:var(--card);border:1.5px solid var(--line);border-radius:20px;
+    padding:7px 14px;font-size:.88rem;font-weight:600;
+  }
+
+  /* made properly cards */
+  .made{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  @media (max-width:860px){.made{grid-template-columns:repeat(2,1fr)}}
+  .made .card{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:20px}
+  .made h3{font-size:1.02rem;margin-bottom:6px}
+  .made p{font-size:.88rem;color:var(--ink-soft)}
+
+  /* pricing */
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:stretch}
+  @media (max-width:860px){.plans{grid-template-columns:1fr}}
+  .plan{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:24px;position:relative;display:flex;flex-direction:column}
+  .plan.hot{border-color:var(--grass);box-shadow:0 0 0 1.5px var(--grass)}
+  .plan .flag{
+    position:absolute;top:-12px;left:16px;background:var(--grass);color:#F2F7EC;
+    font-size:.72rem;font-weight:800;padding:4px 10px;border-radius:9px;transform:rotate(-1.5deg);
+  }
+  .plan h3{font-size:1.05rem}
+  .plan .price{font-family:var(--serif);font-size:2rem;font-weight:600;margin:8px 0 2px}
+  .plan .price small{font-family:var(--sans);font-size:.85rem;color:var(--ink-soft);font-weight:600}
+  .plan ul{margin:14px 0 0;padding:0;list-style:none;font-size:.9rem;color:var(--ink-soft);display:flex;flex-direction:column;gap:7px}
+  .plan li::before{content:"✓ ";color:var(--grass);font-weight:800}
+  .free-line{
+    background:var(--card);border:1.5px dashed var(--marigold);border-radius:14px;
+    padding:16px 20px;margin-bottom:26px;font-weight:600;text-align:center;
+  }
+  .plans-fine{margin-top:18px;font-size:.85rem;color:var(--ink-soft);text-align:center}
+
+  /* faq */
+  .faq{max-width:760px}
+  .faq details{border-bottom:1.5px solid var(--line);padding:16px 4px}
+  .faq summary{font-weight:700;cursor:pointer;font-size:1.02rem}
+  .faq p{margin-top:10px;color:var(--ink-soft);font-size:.95rem}
+
+  /* final cta */
+  .final{background:var(--paper-deep);border-top:1.5px solid var(--line);text-align:center}
+  .final h2{font-size:clamp(1.7rem,3.4vw,2.4rem)}
+  .final p{color:var(--ink-soft);margin-top:12px}
+  .final .cta-row{justify-content:center}
+
+  footer{padding:44px 0 56px;text-align:center;color:var(--ink-soft);font-size:.9rem}
+  footer .brandline{font-family:var(--serif);font-size:1.1rem;color:var(--ink);margin-bottom:8px}
+  footer nav{display:flex;gap:18px;justify-content:center;margin:14px 0;font-weight:600}
+  footer a{color:var(--ink-soft);text-decoration:none}
+  footer a:hover{color:var(--tomato)}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="nav">
+    <a class="brand" href="#"><img src="assets/colormuse-mark.svg" alt=""><span>colormuse</span></a>
+    <nav class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#pages">Real pages</a>
+      <a href="#pricing">Pricing</a>
+      <a href="support.html">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div>
+      <div class="eyebrow">Made by parents, printed on fridge doors</div>
+      <h1>Colouring books that actually look like <span class="under">your family<svg viewBox="0 0 200 12" preserveAspectRatio="none"><path d="M4 8 Q30 2 60 7 T110 6 T160 8 T196 5" fill="none" stroke="#D9542B" stroke-width="4.5" stroke-linecap="round"/></svg></span>.</h1>
+      <p class="lede">Add a few photos — of her, of him, of the dog — or just tell the story, and ColorMuse draws it into a printable colouring book. Their curls. Their grin. Their dinosaur phase. Print it, staple it, treasure it.</p>
+      <div class="cta-row">
+        <a class="cta" href="mailto:cre8t0@gmail.com?subject=ColorMuse%20early%20access&body=Save%20me%20a%20spot!">Get early access</a>
+        <span class="soon">Coming soon to the App Store · in final testing now</span>
+      </div>
+      <div class="chips">
+        <span>First book free</span>
+        <span>No ads, ever</span>
+        <span>Photos never stored, never used for training</span>
+      </div>
+    </div>
+    <div class="fan" aria-label="Real pages drawn by ColorMuse">
+      <figure class="page p1"><img src="assets/braiding.jpg" alt="Colouring page of a girl having her hair braided by her auntie"><figcaption>page 4 · the braiding chair</figcaption></figure>
+      <figure class="page p2"><img src="assets/reveal.jpg" alt="Colouring page of a girl seeing her new braids in the mirror"><figcaption>page 9 · the big reveal</figcaption></figure>
+      <figure class="page p3"><img src="assets/wakeup.jpg" alt="Colouring page of a girl waking up on her birthday"><figcaption>page 1 · birthday no. 5</figcaption></figure>
+    </div>
+  </div>
+
+  <section id="how" class="wrap">
+    <div class="sec-head">
+      <h2>Photo in. Book out.</h2>
+      <p>A few minutes, start to staple.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h3>Tell us who it's for</h3>
+        <p>Add a photo, describe them — puff braids, glasses, the works — or paste a whole bedtime story, page by page. Pick little-kid, big-kid or grown-up linework.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3>We draw the pages</h3>
+        <p>Clean line-art pages starring your people, the same face and hair on every page. Proof each one on a proper proofing table — redraw any page free until it's right.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3>Print and staple</h3>
+        <p>A print-ready PDF with a typeset cover and your dedication inside — “for our brave girl, love Mum &amp; Dad.” Crisp true-black lines on any home printer, US Letter or A4.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="pages" class="wrap">
+    <div class="sec-head">
+      <h2>Real pages, first attempts.</h2>
+      <p>Nothing staged — these are actual pages ColorMuse drew from a pasted story and a described character, exactly as they came out.</p>
+    </div>
+    <div class="gallery">
+      <figure><img src="assets/wakeup.jpg" alt="Birthday morning colouring page" loading="lazy"><figcaption>“Amara wakes up 5” — little-kid lines</figcaption></figure>
+      <figure><img src="assets/braiding.jpg" alt="Braiding day colouring page" loading="lazy"><figcaption>Braiding day, with auntie</figcaption></figure>
+      <figure><img src="assets/reveal.jpg" alt="Mirror reveal colouring page" loading="lazy"><figcaption>The reveal — same girl, page after page</figcaption></figure>
+      <figure><img src="assets/mandala.jpg" alt="Intricate protea flower mandala colouring page" loading="lazy"><figcaption>A protea mandala — grown-up mode</figcaption></figure>
+    </div>
+    <p class="gallery-note">The moment that makes it worth printing: a child recognising <em>themselves</em> on the page — hair, glasses, gap teeth and all.</p>
+  </section>
+
+  <section class="true-band">
+    <div class="wrap true-grid">
+      <div>
+        <div class="sec-head" style="margin-bottom:0">
+          <h2>Drawn true.</h2>
+          <p style="margin-top:12px">Most colouring books draw someone else's kid. ColorMuse draws <em>yours</em> — and gets the details right, because for a lot of families the details have never been right. Hair is drawn as real, named styles, never a generic swirl. Glasses, hijabs, hearing aids and wheelchairs are part of the adventure, never the subject of it.</p>
+        </div>
+        <div class="true-list">
+          <span>Puff braids</span><span>Cornrows</span><span>Box braids</span><span>Locs</span>
+          <span>Twists</span><span>Coily crowns</span><span>Hijab</span><span>Glasses</span>
+          <span>Hearing aid</span><span>Wheelchair</span><span>Every skin tone</span>
+        </div>
+      </div>
+      <div class="made" style="grid-template-columns:1fr 1fr">
+        <div class="card"><h3>A real cover</h3><p>Title, star billing, dedication in your words. It looks like a book because it is one.</p></div>
+        <div class="card"><h3>Pages that fill</h3><p>Closed linework that takes crayon, felt-tip or paint without leaks or grey mush.</p></div>
+        <div class="card"><h3>One kid, every page</h3><p>The same face, hair and outfit from page one to the end — like a real illustrated book.</p></div>
+        <div class="card"><h3>Grown-ups too</h3><p>Intricate botanicals and mandalas of your world — a single page takes an evening.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" class="wrap">
+    <div class="sec-head">
+      <h2>Fair prices, no tricks.</h2>
+      <p>No countdown timers, no ads, and everything you make is yours forever — including everything made on the free book.</p>
+    </div>
+    <div class="free-line">🖍️ Your first book is free. No card, no catch.</div>
+    <div class="plans">
+      <div class="plan">
+        <h3>Just one thing</h3>
+        <p class="price">$0.99 <small>a page</small> · $3.99 <small>a book</small></p>
+        <ul>
+          <li>One standalone drawing, or one full book</li>
+          <li>Cover, dedication and print-ready PDF</li>
+          <li>Perfect for a birthday keepsake</li>
+        </ul>
+      </div>
+      <div class="plan hot">
+        <div class="flag">Most parents pick this</div>
+        <h3>ColorMuse Unlimited</h3>
+        <p class="price">$9.99 <small>/ month</small></p>
+        <ul>
+          <li>Unlimited books and pages</li>
+          <li>Every theme, every linework level</li>
+          <li>Cancel anytime in Settings</li>
+        </ul>
+      </div>
+      <div class="plan">
+        <h3>Unlimited Yearly</h3>
+        <p class="price">$79.99 <small>/ year</small></p>
+        <ul>
+          <li>Everything in Unlimited</li>
+          <li>Every birthday and holiday covered</li>
+          <li>Around $6.67 a month</li>
+        </ul>
+      </div>
+    </div>
+    <p class="plans-fine">A weekly pass ($7.99) is in the app for party-prep emergencies. Prices in USD; billed by Apple.</p>
+  </section>
+
+  <section class="wrap">
+    <div class="sec-head">
+      <h2>Fair questions.</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>Will it really look like my kid?</summary>
+        <p>The likeness comes from your photo or your description — real hair styles, glasses, the gap-tooth grin — and the same character carries through every page of the book. You proof every page before printing, and any page that missed can be redrawn free.</p>
+      </details>
+      <details>
+        <summary>What happens to my photos?</summary>
+        <p>They stay on your phone. A photo is sent, encrypted, only at the moment a page is drawn, is never stored on our servers, and is never used to train any model. Prefer not to upload a photo at all? Describe your child instead — it works beautifully.</p>
+      </details>
+      <details>
+        <summary>What ages is it for?</summary>
+        <p>Three linework levels: little kid (3–5, big bold shapes), big kid (6–9, more detail) — and grown-up, with fine lines and rich detail for proper adult colouring. The books are made by adults; kids do the colouring.</p>
+      </details>
+      <details>
+        <summary>Do I need a fancy printer?</summary>
+        <p>No. Pages are pure black line on white — the cheapest thing a printer can do. A $50 inkjet makes a beautiful book, and a print shop makes a birthday-gift one. No printer? The PDF colours beautifully on an iPad in any drawing app.</p>
+      </details>
+      <details>
+        <summary>Can it draw Elsa / Pikachu / Spider-Man?</summary>
+        <p>No — and that's deliberate. ColorMuse draws your family's own stories, not characters that belong to someone else. Your own dragon-riding, cape-wearing hero? Absolutely.</p>
+      </details>
+      <details>
+        <summary>When can I get it?</summary>
+        <p>ColorMuse is in final testing and coming to the iPhone App Store first (iPad and Android later). Tap “Get early access” above and we'll save you a spot.</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <h2>Tonight's the night you become<br>the parent who makes the book.</h2>
+      <p>First one's free — fridge-door immortality included.</p>
+      <div class="cta-row">
+        <a class="cta" href="mailto:cre8t0@gmail.com?subject=ColorMuse%20early%20access&body=Save%20me%20a%20spot!">Get early access</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="brandline">colormuse</div>
+  <div>made for fridge doors everywhere</div>
+  <nav>
+    <a href="privacy.html">Privacy</a>
+    <a href="support.html">Support</a>
+    <a href="mailto:cre8t0@gmail.com">Contact</a>
+  </nav>
+  <div>© 2026 CRE8T</div>
+</footer>
+
+</body>
+</html>
