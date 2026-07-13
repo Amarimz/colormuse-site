@@ -86,8 +86,10 @@
   .p2{width:56%;right:0;top:0;transform:rotate(3deg);z-index:2}
   .p3{width:46%;left:24%;bottom:0;transform:rotate(-1deg);z-index:3}
 
-  /* sections */
+  /* sections — .wrap's horizontal padding must not eat the vertical
+     rhythm, so sections that are also .wrap restate it explicitly */
   section{padding:64px 0}
+  section.wrap{padding:64px 24px}
   .sec-head{max-width:640px;margin-bottom:38px}
   .sec-head h2{font-size:clamp(1.6rem,3vw,2.2rem)}
   .sec-head p{margin-top:10px;color:var(--ink-soft)}
